@@ -36,8 +36,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, ubuntu-latest]
-        #os: [ubuntu-latest]
+        # We cannot run the tests on windows because nested HyperV is not supported,
+        # therefore, we cannot run linux containers on windows
+        # os: [windows-latest, macos-latest, ubuntu-latest]
+        os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Prepare git
