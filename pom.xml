@@ -8,7 +8,7 @@
     <version>19</version>
   </parent>
   
-  <groupId>io.quarkiverse.docker-client</groupId>
+  <groupId>io.quarkiverse.docker</groupId>
   <artifactId>quarkus-docker-client-parent</artifactId>
   <version>999-SNAPSHOT</version>
   
