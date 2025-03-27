@@ -9,7 +9,7 @@
   
   <artifactId>quarkus-docker-client</artifactId>
   <name>Quarkus Docker Client - Runtime</name>
-  
+  <description>Docker Java client integration</description>
   <dependencies>
     <!-- Quarkus -->
     <dependency>
