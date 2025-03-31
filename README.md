@@ -14,7 +14,7 @@ Add the following dependency to your project:
 <dependency>
     <groupId>io.quarkiverse.docker</groupId>
     <artifactId>quarkus-docker-client</artifactId>
-    <version>{project-version}</version>
+    <version>0.0.3</version>
 </dependency>
 ```
 
