@@ -1,0 +1,711 @@
+[.configuration-legend]
+icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
+[.configuration-reference.searchable, cols="80,.^10,.^10"]
+|===
+
+h|[.header-title]##Configuration property##
+h|Type
+h|Default
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-enabled]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-enabled[`quarkus.docker.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Determines whether this Docker client configuration is enabled.
+
+For the clients, this is true by default.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++enabled`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`true`
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-connect-timeout]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-connect-timeout[`quarkus.docker.connect-timeout`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker.connect-timeout+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the connection timeout when connecting to the Docker daemon.
+
+This timeout applies to the initial connection establishment. If the connection cannot be established within this time, a timeout exception will be thrown.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++connect-timeout`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER_CONNECT_TIMEOUT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER_CONNECT_TIMEOUT+++`
+endif::add-copy-button-to-env-var[]
+--
+|link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html[Duration] link:#duration-note-anchor-quarkus-docker-client_quarkus-docker[icon:question-circle[title=More information about the Duration format]]
+|`10S`
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-read-timeout]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-read-timeout[`quarkus.docker.read-timeout`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker.read-timeout+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the read timeout for Docker API operations.
+
+This timeout applies to individual API operations after the connection has been established. If an operation takes longer than this timeout, it will be interrupted.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++read-timeout`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER_READ_TIMEOUT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER_READ_TIMEOUT+++`
+endif::add-copy-button-to-env-var[]
+--
+|link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html[Duration] link:#duration-note-anchor-quarkus-docker-client_quarkus-docker[icon:question-circle[title=More information about the Duration format]]
+|`30S`
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-docker-host]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-docker-host[`quarkus.docker.docker-host`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker.docker-host+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the Docker daemon host URL.
+
+Supported formats include:
+
+ - tcp://host:port
+ - unix:///path/to/socket
+ - npipe:////./pipe/docker_engine (Windows)
+
+
+
+If not specified, the default will be platform-specific: unix:///var/run/docker.sock for Unix-like systems and npipe:////./pipe/docker_engine for Windows.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++docker-host`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER_DOCKER_HOST+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER_DOCKER_HOST+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-docker-config]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-docker-config[`quarkus.docker.docker-config`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker.docker-config+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the path to the Docker config file.
+
+This file contains registry authentication details and other Docker configuration. If not specified, the default location (~/.docker/config.json) will be used.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++docker-config`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER_DOCKER_CONFIG+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER_DOCKER_CONFIG+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-api-version]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-api-version[`quarkus.docker.api-version`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker.api-version+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the Docker API version to use.
+
+If not specified, the latest supported version will be negotiated with the Docker daemon automatically.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++api-version`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER_API_VERSION+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER_API_VERSION+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-docker-context]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-docker-context[`quarkus.docker.docker-context`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker.docker-context+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the Docker context to use.
+
+Docker contexts allow switching between different Docker endpoints and their associated authentication settings.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++docker-context`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER_DOCKER_CONTEXT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER_DOCKER_CONTEXT+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-docker-cert-path]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-docker-cert-path[`quarkus.docker.docker-cert-path`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker.docker-cert-path+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the path to the Docker TLS certificates.
+
+Required when using TLS authentication with the Docker daemon. The directory should contain ca.pem, cert.pem, and key.pem files.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++docker-cert-path`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER_DOCKER_CERT_PATH+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER_DOCKER_CERT_PATH+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-docker-tls-verify]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-docker-tls-verify[`quarkus.docker.docker-tls-verify`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker.docker-tls-verify+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Determines whether to verify TLS certificates when connecting to the Docker daemon.
+
+Should be enabled in production environments when using TLS.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++docker-tls-verify`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER_DOCKER_TLS_VERIFY+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER_DOCKER_TLS_VERIFY+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-registry-email]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-registry-email[`quarkus.docker.registry-email`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker.registry-email+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the email address for Docker registry authentication.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++registry-email`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER_REGISTRY_EMAIL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER_REGISTRY_EMAIL+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-registry-username]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-registry-username[`quarkus.docker.registry-username`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker.registry-username+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the username for Docker registry authentication.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++registry-username`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER_REGISTRY_USERNAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER_REGISTRY_USERNAME+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-registry-password]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-registry-password[`quarkus.docker.registry-password`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker.registry-password+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the password for Docker registry authentication.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++registry-password`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER_REGISTRY_PASSWORD+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER_REGISTRY_PASSWORD+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-registry-url]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-registry-url[`quarkus.docker.registry-url`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker.registry-url+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the Docker registry URL.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++registry-url`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER_REGISTRY_URL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER_REGISTRY_URL+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-health-check]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-health-check[`quarkus.docker.health-check`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker.health-check+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Controls whether the Docker client health check is enabled.
+
+When enabled, a health check will be registered that verifies the connection to the Docker daemon for all configured clients. This is useful for monitoring the availability of Docker services.
+
+Configuration property: `quarkus.docker.health-check`
+
+Example:
+
+```
+quarkus.docker.health-check=true
+```
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER_HEALTH_CHECK+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER_HEALTH_CHECK+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-docker-client-name-enabled]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-docker-client-name-enabled[`quarkus.docker."docker-client-name".enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker."docker-client-name".enabled+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Determines whether this Docker client configuration is enabled.
+
+For the clients, this is true by default.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++enabled`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`true`
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-docker-client-name-connect-timeout]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-docker-client-name-connect-timeout[`quarkus.docker."docker-client-name".connect-timeout`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker."docker-client-name".connect-timeout+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the connection timeout when connecting to the Docker daemon.
+
+This timeout applies to the initial connection establishment. If the connection cannot be established within this time, a timeout exception will be thrown.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++connect-timeout`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__CONNECT_TIMEOUT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__CONNECT_TIMEOUT+++`
+endif::add-copy-button-to-env-var[]
+--
+|link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html[Duration] link:#duration-note-anchor-quarkus-docker-client_quarkus-docker[icon:question-circle[title=More information about the Duration format]]
+|`10S`
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-docker-client-name-read-timeout]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-docker-client-name-read-timeout[`quarkus.docker."docker-client-name".read-timeout`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker."docker-client-name".read-timeout+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the read timeout for Docker API operations.
+
+This timeout applies to individual API operations after the connection has been established. If an operation takes longer than this timeout, it will be interrupted.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++read-timeout`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__READ_TIMEOUT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__READ_TIMEOUT+++`
+endif::add-copy-button-to-env-var[]
+--
+|link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html[Duration] link:#duration-note-anchor-quarkus-docker-client_quarkus-docker[icon:question-circle[title=More information about the Duration format]]
+|`30S`
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-docker-client-name-docker-host]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-docker-client-name-docker-host[`quarkus.docker."docker-client-name".docker-host`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker."docker-client-name".docker-host+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the Docker daemon host URL.
+
+Supported formats include:
+
+ - tcp://host:port
+ - unix:///path/to/socket
+ - npipe:////./pipe/docker_engine (Windows)
+
+
+
+If not specified, the default will be platform-specific: unix:///var/run/docker.sock for Unix-like systems and npipe:////./pipe/docker_engine for Windows.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++docker-host`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__DOCKER_HOST+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__DOCKER_HOST+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-docker-client-name-docker-config]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-docker-client-name-docker-config[`quarkus.docker."docker-client-name".docker-config`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker."docker-client-name".docker-config+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the path to the Docker config file.
+
+This file contains registry authentication details and other Docker configuration. If not specified, the default location (~/.docker/config.json) will be used.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++docker-config`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__DOCKER_CONFIG+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__DOCKER_CONFIG+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-docker-client-name-api-version]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-docker-client-name-api-version[`quarkus.docker."docker-client-name".api-version`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker."docker-client-name".api-version+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the Docker API version to use.
+
+If not specified, the latest supported version will be negotiated with the Docker daemon automatically.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++api-version`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__API_VERSION+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__API_VERSION+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-docker-client-name-docker-context]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-docker-client-name-docker-context[`quarkus.docker."docker-client-name".docker-context`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker."docker-client-name".docker-context+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the Docker context to use.
+
+Docker contexts allow switching between different Docker endpoints and their associated authentication settings.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++docker-context`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__DOCKER_CONTEXT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__DOCKER_CONTEXT+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-docker-client-name-docker-cert-path]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-docker-client-name-docker-cert-path[`quarkus.docker."docker-client-name".docker-cert-path`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker."docker-client-name".docker-cert-path+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the path to the Docker TLS certificates.
+
+Required when using TLS authentication with the Docker daemon. The directory should contain ca.pem, cert.pem, and key.pem files.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++docker-cert-path`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__DOCKER_CERT_PATH+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__DOCKER_CERT_PATH+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-docker-client-name-docker-tls-verify]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-docker-client-name-docker-tls-verify[`quarkus.docker."docker-client-name".docker-tls-verify`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker."docker-client-name".docker-tls-verify+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Determines whether to verify TLS certificates when connecting to the Docker daemon.
+
+Should be enabled in production environments when using TLS.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++docker-tls-verify`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__DOCKER_TLS_VERIFY+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__DOCKER_TLS_VERIFY+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-docker-client-name-registry-email]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-docker-client-name-registry-email[`quarkus.docker."docker-client-name".registry-email`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker."docker-client-name".registry-email+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the email address for Docker registry authentication.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++registry-email`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__REGISTRY_EMAIL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__REGISTRY_EMAIL+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-docker-client-name-registry-username]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-docker-client-name-registry-username[`quarkus.docker."docker-client-name".registry-username`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker."docker-client-name".registry-username+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the username for Docker registry authentication.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++registry-username`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__REGISTRY_USERNAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__REGISTRY_USERNAME+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-docker-client-name-registry-password]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-docker-client-name-registry-password[`quarkus.docker."docker-client-name".registry-password`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker."docker-client-name".registry-password+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the password for Docker registry authentication.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++registry-password`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__REGISTRY_PASSWORD+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__REGISTRY_PASSWORD+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a|icon:lock[title=Fixed at build time] [[quarkus-docker-client_quarkus-docker-docker-client-name-registry-url]] [.property-path]##link:#quarkus-docker-client_quarkus-docker-docker-client-name-registry-url[`quarkus.docker."docker-client-name".registry-url`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.docker."docker-client-name".registry-url+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Specifies the Docker registry URL.
+
+Configuration property: `quarkus.docker.++[++client-name.++]++registry-url`
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__REGISTRY_URL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_DOCKER__DOCKER_CLIENT_NAME__REGISTRY_URL+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+|===
+
+ifndef::no-duration-note[]
+[NOTE]
+[id=duration-note-anchor-quarkus-docker-client_quarkus-docker]
+.About the Duration format
+====
+To write duration values, use the standard `java.time.Duration` format.
+See the link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html#parse(java.lang.CharSequence)[Duration#parse() Java API documentation] for more information.
+
+You can also use a simplified format, starting with a number:
+
+* If the value is only a number, it represents time in seconds.
+* If the value is a number followed by `ms`, it represents time in milliseconds.
+
+In other cases, the simplified format is translated to the `java.time.Duration` format for parsing:
+
+* If the value is a number followed by `h`, `m`, or `s`, it is prefixed with `PT`.
+* If the value is a number followed by `d`, it is prefixed with `P`.
+====
+endif::no-duration-note[]
