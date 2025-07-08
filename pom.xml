@@ -34,7 +34,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.version>3.24.2</quarkus.version>
-    <docker.version>3.5.2</docker.version>
+    <docker.version>3.5.3</docker.version>
   </properties>
   
   <dependencyManagement>
