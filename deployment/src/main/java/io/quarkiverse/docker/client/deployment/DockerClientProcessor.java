@@ -21,7 +21,12 @@ import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.annotations.ExecutionTime;
 import io.quarkus.deployment.annotations.Record;
 import io.quarkus.deployment.builditem.ApplicationArchivesBuildItem;
+import io.quarkus.deployment.builditem.CombinedIndexBuildItem;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
+import io.quarkus.deployment.builditem.IndexDependencyBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.RuntimeInitializedClassBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.RuntimeInitializedPackageBuildItem;
 import io.quarkus.smallrye.health.deployment.spi.HealthBuildItem;
 
 class DockerClientProcessor {
@@ -162,5 +167,52 @@ class DockerClientProcessor {
         return new HealthBuildItem(
                 "io.quarkiverse.docker.client.runtime.health.DockerClientHealthCheck",
                 config.enableHealthCheck().orElse(false));
+    }
+
+    @BuildStep
+    IndexDependencyBuildItem dockerJavaApiIndex() {
+        return new IndexDependencyBuildItem(
+                "com.github.docker-java",
+                "docker-java-api");
+    }
+
+    @BuildStep
+    void registerReflection(
+            CombinedIndexBuildItem index,
+            BuildProducer<ReflectiveClassBuildItem> reflectiveClasses) {
+
+        Set<String> classes = new HashSet<>();
+
+        index.getIndex().getKnownClasses().stream()
+                .map(ci -> ci.name().toString())
+                .filter(name -> name.startsWith("com.github.dockerjava.api"))
+                .forEach(classes::add);
+
+        reflectiveClasses.produce(
+                ReflectiveClassBuildItem.builder(classes.toArray(String[]::new))
+                        .constructors()
+                        .methods()
+                        .fields()
+                        .build());
+
+        reflectiveClasses.produce(ReflectiveClassBuildItem.builder(
+                "com.github.dockerjava.core.DockerConfigFile",
+                "com.github.dockerjava.core.command.AbstrDockerCmd",
+                "com.github.dockerjava.core.command.CreateContainerCmdImpl",
+                "com.github.dockerjava.core.command.CreateNetworkCmdImpl")
+                .constructors()
+                .methods()
+                .fields()
+                .build());
+    }
+
+    @BuildStep
+    public void runtimeInitialized(BuildProducer<RuntimeInitializedClassBuildItem> runtimeInitializedClassProducer,
+            BuildProducer<RuntimeInitializedPackageBuildItem> runtimeInitializedPackageProducer,
+            BuildProducer<ReflectiveClassBuildItem> reflectiveClassProducer) {
+        runtimeInitializedClassProducer
+                .produce(new RuntimeInitializedClassBuildItem("com.github.dockerjava.transport.NamedPipeSocket$Kernel32"));
+        runtimeInitializedPackageProducer
+                .produce(new RuntimeInitializedPackageBuildItem("org.apache.hc.client5.http.impl.auth"));
     }
 }
