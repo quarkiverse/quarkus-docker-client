@@ -17,6 +17,3 @@ Add the following dependency to your project:
     <version>0.0.5</version>
 </dependency>
 ```
-
-> [!CAUTION]
-> This extension currently doesn't support GraalVM native image compilation.
