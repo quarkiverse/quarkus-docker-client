@@ -7,10 +7,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.*;
+import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
+@Testcontainers
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class NamedDockerClientResourceTest {
@@ -18,6 +22,9 @@ class NamedDockerClientResourceTest {
     private static final String TEST_IMAGE = "nginx:alpine";
     private final Map<String, String> containerIds = new HashMap<>();
     private static final String[] CLIENT_NAMES = { "default", "client1", "client2" };
+
+    @Container
+    public static GenericContainer<?> testContainer = new GenericContainer<>(TEST_IMAGE).withExposedPorts(80);
 
     @Test
     @Order(1)
