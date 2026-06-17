@@ -33,6 +33,16 @@
       <artifactId>docker-java-transport-httpclient5</artifactId>
       <version>${docker.version}</version>
     </dependency>
+    <!--
+      httpclient5 references org.brotli.dec at build time (ContentCompressionExec). It is an
+      optional dependency of httpclient5, so it must be provided explicitly, otherwise the
+      native image build fails with an unresolved org.brotli.dec.BrotliInputStream.
+    -->
+    <dependency>
+      <groupId>org.brotli</groupId>
+      <artifactId>dec</artifactId>
+      <version>${brotli.version}</version>
+    </dependency>
   </dependencies>
   
   <build>
