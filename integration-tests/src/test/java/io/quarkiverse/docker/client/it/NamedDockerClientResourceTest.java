@@ -17,7 +17,7 @@ import io.quarkus.test.junit.QuarkusTest;
 @Testcontainers
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class NamedDockerClientResourceTest {
+public class NamedDockerClientResourceTest {
 
     private static final String TEST_IMAGE = "nginx:alpine";
     private final Map<String, String> containerIds = new HashMap<>();
