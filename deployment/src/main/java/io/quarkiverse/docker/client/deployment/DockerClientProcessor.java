@@ -1,6 +1,10 @@
 package io.quarkiverse.docker.client.deployment;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import jakarta.inject.Singleton;
@@ -79,7 +83,8 @@ class DockerClientProcessor {
     }
 
     /**
-     * Sets up Docker clients at runtime initialization. Creates synthetic beans for both the default client and named clients.
+     * Sets up Docker clients at runtime initialization. Creates synthetic beans for both the default client and named
+     * clients.
      *
      * @param recorder The Docker client recorder
      * @param clientNames The collected Docker client names
@@ -170,10 +175,12 @@ class DockerClientProcessor {
     }
 
     @BuildStep
-    IndexDependencyBuildItem dockerJavaApiIndex() {
-        return new IndexDependencyBuildItem(
-                "com.github.docker-java",
-                "docker-java-api");
+    void dockerJavaApiIndex(BuildProducer<IndexDependencyBuildItem> indexDependencyProducer) {
+        indexDependencyProducer.produce(Set.of(
+                new IndexDependencyBuildItem(
+                        "com.github.docker-java", "docker-java-api"),
+                new IndexDependencyBuildItem(
+                        "com.github.docker-java", "docker-java-core")));
     }
 
     @BuildStep
@@ -185,7 +192,7 @@ class DockerClientProcessor {
 
         index.getIndex().getKnownClasses().stream()
                 .map(ci -> ci.name().toString())
-                .filter(name -> name.startsWith("com.github.dockerjava.api"))
+                .filter(name -> name.startsWith("com.github.dockerjava.api") || name.startsWith("com.github.dockerjava.core"))
                 .forEach(classes::add);
 
         reflectiveClasses.produce(
@@ -195,11 +202,7 @@ class DockerClientProcessor {
                         .fields()
                         .build());
 
-        reflectiveClasses.produce(ReflectiveClassBuildItem.builder(
-                "com.github.dockerjava.core.DockerConfigFile",
-                "com.github.dockerjava.core.command.AbstrDockerCmd",
-                "com.github.dockerjava.core.command.CreateContainerCmdImpl",
-                "com.github.dockerjava.core.command.CreateNetworkCmdImpl")
+        reflectiveClasses.produce(ReflectiveClassBuildItem.builder("com.github.dockerjava.core.DockerConfigFile")
                 .constructors()
                 .methods()
                 .fields()
@@ -207,12 +210,14 @@ class DockerClientProcessor {
     }
 
     @BuildStep
-    public void runtimeInitialized(BuildProducer<RuntimeInitializedClassBuildItem> runtimeInitializedClassProducer,
-            BuildProducer<RuntimeInitializedPackageBuildItem> runtimeInitializedPackageProducer,
-            BuildProducer<ReflectiveClassBuildItem> reflectiveClassProducer) {
+    public void runtimeInitialized(
+            BuildProducer<RuntimeInitializedClassBuildItem> runtimeInitializedClassProducer,
+            BuildProducer<RuntimeInitializedPackageBuildItem> runtimeInitializedPackageProducer) {
         runtimeInitializedClassProducer
-                .produce(new RuntimeInitializedClassBuildItem("com.github.dockerjava.transport.NamedPipeSocket$Kernel32"));
+                .produce(new RuntimeInitializedClassBuildItem(
+                        "com.github.dockerjava.transport.NamedPipeSocket$Kernel32"));
         runtimeInitializedPackageProducer
-                .produce(new RuntimeInitializedPackageBuildItem("org.apache.hc.client5.http.impl.auth"));
+                .produce(new RuntimeInitializedPackageBuildItem(
+                        "org.apache.hc.client5.http.impl.auth"));
     }
 }
