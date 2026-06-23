@@ -1,19 +1,3 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package io.quarkiverse.docker.client.it.cmd;
 
 import java.io.File;
@@ -54,17 +38,6 @@ import com.github.dockerjava.api.model.Frame;
 import com.github.dockerjava.api.model.HealthCheck;
 import com.github.dockerjava.api.model.Statistics;
 
-/**
- * Mirrors docker-java's container command integration tests:
- * CreateContainerCmdIT, StartContainerCmdIT, StopContainerCmdIT,
- * KillContainerCmdIT, RestartContainerCmdImplIT, PauseCmdIT, UnpauseCmdIT,
- * RenameContainerCmdIT, WaitContainerCmdIT, RemoveContainerCmdImplIT,
- * ListContainersCmdIT, InspectContainerCmdIT, ContainerDiffCmdIT,
- * ResizeContainerCmdIT, UpdateContainerCmdIT, LogContainerCmdIT, StatsCmdIT,
- * HealthCmdIT, AttachContainerCmdIT, CopyArchiveToContainerCmdIT,
- * CopyArchiveFromContainerCmdIT and CopyFileFromContainerCmdIT. Each docker
- * command is exposed through its own REST endpoint.
- */
 @Path("/docker-container")
 @ApplicationScoped
 @Produces(MediaType.APPLICATION_JSON)
@@ -73,7 +46,6 @@ public class ContainerResource {
     @Inject
     DockerClient dockerClient;
 
-    // CreateContainerCmdIT#createContainer
     @POST
     @Path("/create")
     @Produces(MediaType.TEXT_PLAIN)
@@ -132,7 +104,6 @@ public class ContainerResource {
         }
     }
 
-    // StartContainerCmdIT#startContainer
     @POST
     @Path("/{id}/start")
     public Response start(@PathParam("id") String id) {
@@ -144,7 +115,6 @@ public class ContainerResource {
         }
     }
 
-    // StopContainerCmdIT#testStopContainer
     @POST
     @Path("/{id}/stop")
     public Response stop(@PathParam("id") String id, @QueryParam("timeout") Integer timeout) {
@@ -156,7 +126,6 @@ public class ContainerResource {
         }
     }
 
-    // KillContainerCmdIT#killContainer
     @POST
     @Path("/{id}/kill")
     public Response kill(@PathParam("id") String id) {
@@ -168,7 +137,6 @@ public class ContainerResource {
         }
     }
 
-    // RestartContainerCmdImplIT#restartContainer
     @POST
     @Path("/{id}/restart")
     public Response restart(@PathParam("id") String id, @QueryParam("timeout") Integer timeout) {
@@ -180,7 +148,6 @@ public class ContainerResource {
         }
     }
 
-    // PauseCmdIT#pauseRunningContainer
     @POST
     @Path("/{id}/pause")
     public Response pause(@PathParam("id") String id) {
@@ -192,7 +159,6 @@ public class ContainerResource {
         }
     }
 
-    // UnpauseCmdIT#unpausePausedContainer
     @POST
     @Path("/{id}/unpause")
     public Response unpause(@PathParam("id") String id) {
@@ -204,7 +170,6 @@ public class ContainerResource {
         }
     }
 
-    // RenameContainerCmdIT#renameContainer
     @POST
     @Path("/{id}/rename")
     public Response rename(@PathParam("id") String id, @QueryParam("name") String name) {
@@ -216,7 +181,6 @@ public class ContainerResource {
         }
     }
 
-    // WaitContainerCmdIT#testWaitContainer
     @POST
     @Path("/{id}/wait")
     @Produces(MediaType.TEXT_PLAIN)
@@ -229,7 +193,6 @@ public class ContainerResource {
         }
     }
 
-    // RemoveContainerCmdImplIT#removeContainer
     @DELETE
     @Path("/{id}")
     public Response remove(@PathParam("id") String id, @QueryParam("force") boolean force) {
@@ -241,7 +204,6 @@ public class ContainerResource {
         }
     }
 
-    // ListContainersCmdIT#testListContainers
     @GET
     public Response list(@QueryParam("label") List<String> labels) {
         var cmd = dockerClient.listContainersCmd().withShowAll(true);
@@ -252,7 +214,6 @@ public class ContainerResource {
         return Response.ok(containers).build();
     }
 
-    // InspectContainerCmdIT#inspectContainer
     @GET
     @Path("/{id}/inspect")
     public Response inspect(@PathParam("id") String id, @QueryParam("size") boolean size) {
@@ -264,7 +225,6 @@ public class ContainerResource {
         }
     }
 
-    // ContainerDiffCmdIT#testContainerDiff
     @GET
     @Path("/{id}/diff")
     public Response diff(@PathParam("id") String id) {
@@ -276,7 +236,6 @@ public class ContainerResource {
         }
     }
 
-    // ResizeContainerCmdIT#resizeContainerTtyTest
     @POST
     @Path("/{id}/resize")
     public Response resize(@PathParam("id") String id,
@@ -290,7 +249,6 @@ public class ContainerResource {
         }
     }
 
-    // UpdateContainerCmdIT#updateContainer
     @POST
     @Path("/{id}/update")
     public Response update(@PathParam("id") String id) {
@@ -307,7 +265,6 @@ public class ContainerResource {
         }
     }
 
-    // LogContainerCmdIT#asyncMultipleLogContainer : collect container logs as text
     @GET
     @Path("/{id}/logs")
     @Produces(MediaType.TEXT_PLAIN)
@@ -327,7 +284,6 @@ public class ContainerResource {
         return Response.ok(log.toString()).build();
     }
 
-    // StatsCmdIT#testStatsNoStreaming : return a single stats sample
     @GET
     @Path("/{id}/stats")
     public Response stats(@PathParam("id") String id) throws InterruptedException, IOException {
@@ -352,7 +308,6 @@ public class ContainerResource {
         return Response.ok(collected.get(0)).build();
     }
 
-    // HealthCmdIT#healthiness : poll until the container becomes healthy
     @GET
     @Path("/{id}/health")
     @Produces(MediaType.TEXT_PLAIN)
@@ -372,7 +327,6 @@ public class ContainerResource {
         return Response.ok(status).build();
     }
 
-    // CopyArchiveToContainerCmdIT#copyStreamToContainer : write a file then copy it in
     @POST
     @Path("/{id}/copy-to")
     public Response copyTo(@PathParam("id") String id,
@@ -396,7 +350,6 @@ public class ContainerResource {
         }
     }
 
-    // CopyArchiveFromContainerCmdIT#copyFromContainer : export a path as a tar stream
     @GET
     @Path("/{id}/copy-from")
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
@@ -414,7 +367,6 @@ public class ContainerResource {
         }
     }
 
-    // CopyFileFromContainerCmdIT#copyFromNonExistingContainer (deprecated cmd)
     @GET
     @Path("/{id}/copy-file-from")
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
@@ -432,9 +384,6 @@ public class ContainerResource {
         }
     }
 
-    // AttachContainerCmdIT#attachContainerWithoutTTY : attach to a container and
-    // collect its output. The whole flow runs server-side because attaching needs
-    // to be wired up before the container is started.
     @POST
     @Path("/attach-scenario")
     @Produces(MediaType.TEXT_PLAIN)

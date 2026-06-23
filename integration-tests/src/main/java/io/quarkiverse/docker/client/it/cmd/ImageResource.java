@@ -1,19 +1,3 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package io.quarkiverse.docker.client.it.cmd;
 
 import java.io.ByteArrayInputStream;
@@ -45,12 +29,6 @@ import com.github.dockerjava.api.command.InspectImageResponse;
 import com.github.dockerjava.api.exception.NotFoundException;
 import com.github.dockerjava.api.model.Image;
 
-/**
- * Mirrors docker-java's ListImagesCmdIT, PullImageCmdIT, RemoveImageCmdIT,
- * TagImageCmdIT, CommitCmdIT, SaveImageCmdIT, SaveImagesCmdIT, LoadImageCmdIT
- * and BuildImageCmdIT. Each docker command is exposed through its own REST
- * endpoint.
- */
 @Path("/docker-image")
 @ApplicationScoped
 @Produces(MediaType.APPLICATION_JSON)
@@ -59,14 +37,12 @@ public class ImageResource {
     @Inject
     DockerClient dockerClient;
 
-    // ListImagesCmdIT#listImages
     @GET
     public Response listImages() {
         List<Image> images = dockerClient.listImagesCmd().withShowAll(true).exec();
         return Response.ok(images).build();
     }
 
-    // PullImageCmdIT#testPullImage
     @POST
     @Path("/pull")
     public Response pullImage(@QueryParam("image") String image) throws InterruptedException {
@@ -74,9 +50,6 @@ public class ImageResource {
         return Response.noContent().build();
     }
 
-    // Test-setup helper: pull only when the image is not already cached locally.
-    // Used by the tests to guarantee an image is present without paying a registry
-    // round-trip (and possible timeout) on every run.
     @POST
     @Path("/ensure")
     public Response ensureImage(@QueryParam("image") String image) throws InterruptedException {
@@ -88,7 +61,6 @@ public class ImageResource {
         return Response.noContent().build();
     }
 
-    // helper used by CommitCmdIT / PullImageCmdIT / BuildImageCmdIT (inspectImageCmd).
     @GET
     @Path("/inspect")
     public Response inspectImage(@QueryParam("name") String name) {
@@ -100,7 +72,6 @@ public class ImageResource {
         }
     }
 
-    // RemoveImageCmdIT#removeImage / removeNonExistingImage
     @DELETE
     public Response removeImage(@QueryParam("name") String name, @QueryParam("force") boolean force) {
         try {
@@ -111,7 +82,6 @@ public class ImageResource {
         }
     }
 
-    // TagImageCmdIT#tagImage / tagNonExistingImage
     @POST
     @Path("/tag")
     public Response tagImage(@QueryParam("image") String image,
@@ -125,7 +95,6 @@ public class ImageResource {
         }
     }
 
-    // CommitCmdIT#commit
     @POST
     @Path("/commit/{containerId}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -138,7 +107,6 @@ public class ImageResource {
         }
     }
 
-    // CommitCmdIT#commitWithLabels
     @POST
     @Path("/commit/{containerId}/labels")
     @Produces(MediaType.TEXT_PLAIN)
@@ -150,7 +118,6 @@ public class ImageResource {
         return Response.ok(imageId).build();
     }
 
-    // SaveImageCmdIT#saveImage
     @GET
     @Path("/save")
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
@@ -166,7 +133,6 @@ public class ImageResource {
         return Response.ok(out).build();
     }
 
-    // SaveImagesCmdIT#saveNoImages / saveImagesWithNameAndTag
     @GET
     @Path("/save-images")
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
@@ -182,7 +148,6 @@ public class ImageResource {
         return Response.ok(out).build();
     }
 
-    // LoadImageCmdIT#loadImageFromTar : save an existing image to a tar and load it back.
     @POST
     @Path("/load")
     public Response loadImage(@QueryParam("name") String name) throws Exception {
@@ -198,7 +163,6 @@ public class ImageResource {
         return Response.noContent().build();
     }
 
-    // BuildImageCmdIT#labels : build a minimal image from a generated Dockerfile.
     @POST
     @Path("/build")
     @Produces(MediaType.TEXT_PLAIN)

@@ -1,19 +1,3 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package io.quarkiverse.docker.client.it.cmd;
 
 import java.util.Collections;
@@ -36,12 +20,6 @@ import com.github.dockerjava.api.command.CreateNetworkResponse;
 import com.github.dockerjava.api.exception.NotFoundException;
 import com.github.dockerjava.api.model.Network;
 
-/**
- * Mirrors docker-java's CreateNetworkCmdIT, InspectNetworkCmdIT,
- * ListNetworksCmdIT, RemoveNetworkCmdIT, ConnectToNetworkCmdIT and
- * DisconnectFromNetworkCmdIT. Each docker command is exposed through its own
- * REST endpoint.
- */
 @Path("/docker-network")
 @ApplicationScoped
 @Produces(MediaType.APPLICATION_JSON)
@@ -50,7 +28,6 @@ public class NetworkResource {
     @Inject
     DockerClient dockerClient;
 
-    // CreateNetworkCmdIT#createNetwork
     @POST
     @Path("/{name}")
     public Response createNetwork(@PathParam("name") String name) {
@@ -58,7 +35,6 @@ public class NetworkResource {
         return Response.ok(response).build();
     }
 
-    // CreateNetworkCmdIT#createNetworkWithIpamConfig
     @POST
     @Path("/{name}/ipam")
     public Response createNetworkWithIpam(@PathParam("name") String name, @QueryParam("subnet") String subnet) {
@@ -67,7 +43,6 @@ public class NetworkResource {
         return Response.ok(response).build();
     }
 
-    // CreateNetworkCmdIT#createNetworkWithLabel
     @POST
     @Path("/{name}/label")
     public Response createNetworkWithLabel(@PathParam("name") String name) {
@@ -78,7 +53,6 @@ public class NetworkResource {
         return Response.ok(response).build();
     }
 
-    // CreateNetworkCmdIT#createAttachableNetwork
     @POST
     @Path("/{name}/attachable")
     public Response createAttachableNetwork(@PathParam("name") String name) {
@@ -89,14 +63,12 @@ public class NetworkResource {
         return Response.ok(response).build();
     }
 
-    // ListNetworksCmdIT#listNetworks
     @GET
     public Response listNetworks() {
         List<Network> networks = dockerClient.listNetworksCmd().exec();
         return Response.ok(networks).build();
     }
 
-    // InspectNetworkCmdIT#inspectNetwork
     @GET
     @Path("/{networkId}")
     public Response inspectNetwork(@PathParam("networkId") String networkId) {
@@ -108,7 +80,6 @@ public class NetworkResource {
         }
     }
 
-    // RemoveNetworkCmdIT#removeNetwork / removeNonExistingContainer
     @DELETE
     @Path("/{networkId}")
     public Response removeNetwork(@PathParam("networkId") String networkId) {
@@ -120,7 +91,6 @@ public class NetworkResource {
         }
     }
 
-    // ConnectToNetworkCmdIT#connectToNetwork
     @POST
     @Path("/{networkId}/connect/{containerId}")
     public Response connectToNetwork(@PathParam("networkId") String networkId,
@@ -129,7 +99,6 @@ public class NetworkResource {
         return Response.noContent().build();
     }
 
-    // DisconnectFromNetworkCmdIT#disconnectFromNetwork
     @POST
     @Path("/{networkId}/disconnect/{containerId}")
     public Response disconnectFromNetwork(@PathParam("networkId") String networkId,

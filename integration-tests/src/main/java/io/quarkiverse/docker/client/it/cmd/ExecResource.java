@@ -1,19 +1,3 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package io.quarkiverse.docker.client.it.cmd;
 
 import java.util.Collections;
@@ -37,11 +21,6 @@ import com.github.dockerjava.api.command.ExecCreateCmdResponse;
 import com.github.dockerjava.api.command.InspectExecResponse;
 import com.github.dockerjava.api.model.Frame;
 
-/**
- * Mirrors docker-java's ExecCreateCmdImplIT, ExecStartCmdIT, InspectExecCmdIT
- * and ResizeExecCmdIT. Each docker command is exposed through its own REST
- * endpoint.
- */
 @Path("/docker-exec")
 @ApplicationScoped
 @Produces(MediaType.APPLICATION_JSON)
@@ -53,7 +32,6 @@ public class ExecResource {
     @Inject
     DockerClient dockerClient;
 
-    // ExecCreateCmdImplIT#execCreateTest
     @POST
     @Path("/{containerId}/create")
     @Produces(MediaType.TEXT_PLAIN)
@@ -69,7 +47,6 @@ public class ExecResource {
         return Response.ok(response.getId()).build();
     }
 
-    // ExecStartCmdIT#execStart : run the exec to completion
     @POST
     @Path("/{execId}/start")
     public Response execStart(@PathParam("execId") String execId) throws InterruptedException {
@@ -80,7 +57,6 @@ public class ExecResource {
         return Response.noContent().build();
     }
 
-    // InspectExecCmdIT#inspectExec
     @GET
     @Path("/{execId}/inspect")
     public Response inspectExec(@PathParam("execId") String execId) {
@@ -88,8 +64,6 @@ public class ExecResource {
         return Response.ok(response).build();
     }
 
-    // ResizeExecCmdIT#resizeExecInstanceTtyTest : run the full resize scenario and
-    // report whether the exec completed once its tty was resized to the target size.
     @POST
     @Path("/{containerId}/resize-scenario")
     public Response resizeScenario(@PathParam("containerId") String containerId) throws InterruptedException {
